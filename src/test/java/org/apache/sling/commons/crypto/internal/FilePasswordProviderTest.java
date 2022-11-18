@@ -20,6 +20,7 @@ package org.apache.sling.commons.crypto.internal;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.UUID;
 
 import org.apache.commons.lang3.reflect.MethodUtils;
@@ -140,7 +141,7 @@ public class FilePasswordProviderTest {
     @Test
     public void testPasswordFileNotReadableAfterConfigurationCheck() throws Exception {
         final FilePasswordProvider provider = new FilePasswordProvider();
-        final File file = File.createTempFile(UUID.randomUUID().toString(), null);
+        final File file = Files.createTempFile(UUID.randomUUID().toString(), null).toFile();
         final String path = file.getPath();
         final FilePasswordProviderConfiguration configuration = mock(FilePasswordProviderConfiguration.class);
         when(configuration.path()).thenReturn(path);
